@@ -14,3 +14,15 @@ func ReportHazard(station string) error {
 	}
 	return nil
 }
+func ErrorCode(err error) string {
+	switch {
+	case errors.Is(err, ErrStationNotFound):
+		return "STATION_NOT_FOUND"
+	case errors.Is(err, ErrVersionConflict):
+		return "VERSION_CONFLICT"
+	case err != nil:
+		return "STORAGE_ERROR"
+	default:
+		return ""
+	}
+}
